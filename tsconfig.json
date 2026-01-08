@@ -29,7 +29,8 @@
     "noUncheckedSideEffectImports": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@design-system/*": ["./src/components/ui/*"]
     }
   }
 }

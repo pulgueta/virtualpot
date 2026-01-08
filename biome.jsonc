@@ -4,5 +4,24 @@
     "ultracite/biome/core",
     "ultracite/biome/react",
     "ultracite/biome/remix"
-  ]
+  ],
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": {
+          "level": "on",
+          "options": {
+            "identifierOrder": "lexicographic",
+            "groups": [
+              ":BUN:",
+              ":BLANK_LINE:",
+              ["react", "react-dom", ":PACKAGE:"],
+              ":BLANK_LINE:",
+              [":ALIAS:", ":PATH:"]
+            ]
+          }
+        }
+      }
+    }
+  }
 }
