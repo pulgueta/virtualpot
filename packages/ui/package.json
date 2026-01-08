@@ -1,0 +1,32 @@
+{
+  "name": "@virtualpot/ui",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./*": "./src/components/*.tsx",
+    "./hooks/*": "./src/hooks/*.ts",
+    "./utils": "./src/lib/utils.ts",
+    "./styles.css": "./src/styles/base.css"
+  },
+  "dependencies": {
+    "@base-ui/react": "catalog:"
+  },
+  "peerDependencies": {
+    "@fontsource-variable/geist": "catalog:",
+    "class-variance-authority": "catalog:",
+    "clsx": "catalog:",
+    "shadcn": "catalog:",
+    "tailwindcss": "catalog:",
+    "tailwind-merge": "catalog:",
+    "tw-animate-css": "catalog:",
+    "react": "catalog:"
+  },
+  "devDependencies": {
+    "@types/react": "catalog:",
+    "@tailwindcss/typography": "catalog:",
+    "@tailwindcss/vite": "catalog:",
+    "bun-types": "catalog:",
+    "typescript": "catalog:"
+  }
+}

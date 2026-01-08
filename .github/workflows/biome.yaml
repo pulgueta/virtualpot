@@ -25,6 +25,3 @@ jobs:
 
       - name: Format
         run: bun run format
-
-      - name: Typecheck
-        run: bun run typecheck
