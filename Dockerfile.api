@@ -1,5 +1,4 @@
-ARG BUN_VERSION=1
-ARG PORT
+ARG BUN_VERSION=1-alpine
 ARG HOSTNAME
 ARG FRONTEND_URL
 
@@ -21,23 +20,21 @@ COPY --from=deps /app/apps/api/node_modules ./apps/api/node_modules
 
 COPY . .
 
-ENV PORT=$PORT
 ENV HOSTNAME=$HOSTNAME
 ENV FRONTEND_URL=$FRONTEND_URL
 
 RUN bun run build --filter=@virtualpot/api
 
-FROM oven/bun:${BUN_VERSION}-slim AS runner
+FROM gcr.io/distroless/base AS runner
 
 WORKDIR /app
 
-COPY --from=builder /app/apps/api/dist ./dist
+COPY --from=builder /app/apps/api/dist/server server
 
 ENV NODE_ENV=production
-ENV PORT=$PORT
 ENV HOSTNAME=$HOSTNAME
 ENV FRONTEND_URL=$FRONTEND_URL
 
-EXPOSE $PORT
+EXPOSE 3000
 
-CMD ["bun", "run", "dist/index.js"]
+CMD ["./server"]
