@@ -28,6 +28,6 @@ FROM oven/bun:${BUN_VERSION} AS runner
 
 WORKDIR /app
 
-COPY --from=builder /app/.output /app/.output
+COPY --from=builder /app/apps/web/.output /app/.output
 
 CMD ["bun", "run", ".output/server/index.mjs"]
