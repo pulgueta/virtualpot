@@ -37,7 +37,7 @@
     "dev": "turbo run dev",
     "build": "turbo run build",
     "preview": "turbo run preview",
-    "start": "bun run .output/server/index.mjs",
+    "start": "turbo run start",
     "test": "turbo run test",
     "lint": "ultracite fix --unsafe",
     "format": "biome check --write --unsafe",
