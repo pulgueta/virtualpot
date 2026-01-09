@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY package.json bun.lock turbo.json ./
 
-RUN bun install --frozen-lockfile
+RUN bun install
 
 FROM oven/bun:${BUN_VERSION} AS app-deps
 
@@ -19,7 +19,7 @@ COPY --from=base-deps /app/package.json ./package.json
 COPY apps/*/package.json ./apps/*/package.json
 COPY packages/*/package.json ./packages/*/package.json
 
-RUN bun install --frozen-lockfile
+RUN bun install
 
 FROM oven/bun:${BUN_VERSION} AS builder
 
