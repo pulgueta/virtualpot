@@ -26,8 +26,15 @@ WORKDIR /app
 
 COPY --from=builder /app/apps/api/dist ./dist
 
-ENV NODE_ENV=production
+ARG PORT
+ARG HOSTNAME
+ARG FRONTEND_URL
 
-EXPOSE 3001
+ENV NODE_ENV=production
+ENV PORT=${PORT}
+ENV HOSTNAME=${HOSTNAME}
+ENV FRONTEND_URL=${FRONTEND_URL}
+
+EXPOSE ${PORT}
 
 CMD ["bun", "run", "dist/index.js"]
