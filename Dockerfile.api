@@ -7,7 +7,7 @@ WORKDIR /app
 COPY package.json bun.lock turbo.json ./
 COPY apps/api/package.json ./apps/api/package.json
 
-RUN bun install --frozen-lockfile
+RUN bun install
 
 FROM oven/bun:${BUN_VERSION} AS builder
 
@@ -24,9 +24,9 @@ FROM oven/bun:${BUN_VERSION}-slim AS runner
 
 WORKDIR /app
 
-ENV NODE_ENV=production
-
 COPY --from=builder /app/apps/api/dist ./dist
+
+ENV NODE_ENV=production
 
 EXPOSE 3001
 
