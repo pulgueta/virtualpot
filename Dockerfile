@@ -1,4 +1,5 @@
 ARG BUN_VERSION=1.3.5
+ARG SKIP_ENV_VALIDATION=1
 
 FROM oven/bun:${BUN_VERSION} AS deps
 
@@ -14,6 +15,9 @@ RUN bun install --frozen-lockfile
 FROM oven/bun:${BUN_VERSION} AS builder
 
 WORKDIR /app
+
+ARG SKIP_ENV_VALIDATION
+ENV SKIP_ENV_VALIDATION=${SKIP_ENV_VALIDATION}
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/apps/api/node_modules ./apps/api/node_modules
