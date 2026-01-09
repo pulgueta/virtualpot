@@ -1,4 +1,5 @@
 ARG BUN_VERSION=1
+ARG VITE_API_URL
 
 FROM oven/bun:${BUN_VERSION} AS deps
 
@@ -22,6 +23,8 @@ COPY --from=deps /app/packages/ui/node_modules ./packages/ui/node_modules
 
 COPY . .
 
+ENV VITE_API_URL=$VITE_API_URL
+
 RUN bun run build
 
 FROM oven/bun:${BUN_VERSION} AS runner
@@ -29,8 +32,6 @@ FROM oven/bun:${BUN_VERSION} AS runner
 WORKDIR /app
 
 COPY --from=builder /app/apps/web/.output /app/.output
-
-ARG VITE_API_URL
 
 ENV VITE_API_URL=$VITE_API_URL
 ENV NODE_ENV=production
