@@ -1,12 +1,36 @@
-node_modules/
+# Dependencies
+node_modules
+**/node_modules
+
+# Build outputs
+dist
 .output
 .nitro
-.turbo
-.git*
-.github
-.vscode
-.cursor
-.claude
-README.md
+**/.output
+**/.nitro
+
+# Development files
+.git
+.gitignore
+*.md
 .env*
-biome*
+!.env.example
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Test files
+coverage
+**/*.test.ts
+**/*.spec.ts
