@@ -2,14 +2,13 @@ import { cors } from "@elysiajs/cors";
 import { swagger } from "@elysiajs/swagger";
 import { Elysia } from "elysia";
 
-import { healthRoutes } from "./routes/health";
-import { userRoutes } from "./routes/users";
+import { healthRoutes } from "@/routes/health";
+import { userRoutes } from "@/routes/users";
 
 const app = new Elysia()
   .use(
     cors({
-      origin: true,
-      credentials: true,
+      origin: process.env.FRONTEND_URL,
     })
   )
   .use(
