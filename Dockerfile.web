@@ -28,14 +28,6 @@ FROM oven/bun:${BUN_VERSION} AS runner
 
 WORKDIR /app
 
-RUN groupadd -r appuser && useradd -r -g appuser appuser
-
-COPY --from=builder /app/apps/web/node_modules ./node_modules
-
-RUN chown -R appuser:appuser /app
-
-USER appuser
-
 COPY --from=builder /app/apps/web/.output /app/.output
 
 ENV NODE_ENV=production

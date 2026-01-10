@@ -24,13 +24,7 @@ FROM debian:bookworm-slim AS runner
 
 WORKDIR /app
 
-RUN groupadd -r appuser && useradd -r -g appuser appuser
-
 COPY --from=builder /app/apps/api/dist/server server
-
-RUN chown -R appuser:appuser /app
-
-USER appuser
 
 ENV NODE_ENV=production
 
