@@ -1,6 +1,4 @@
 ARG BUN_VERSION=1-alpine
-ARG HOSTNAME
-ARG FRONTEND_URL
 
 FROM oven/bun:${BUN_VERSION} AS deps
 
@@ -20,20 +18,21 @@ COPY --from=deps /app/apps/api/node_modules ./apps/api/node_modules
 
 COPY . .
 
-ENV HOSTNAME=$HOSTNAME
-ENV FRONTEND_URL=$FRONTEND_URL
-
 RUN bun run build --filter=@virtualpot/api
 
-FROM gcr.io/distroless/base AS runner
+FROM debian:bookworm-slim AS runner
 
 WORKDIR /app
 
+RUN groupadd -r appuser && useradd -r -g appuser appuser
+
 COPY --from=builder /app/apps/api/dist/server server
 
+RUN chown -R appuser:appuser /app
+
+USER appuser
+
 ENV NODE_ENV=production
-ENV HOSTNAME=$HOSTNAME
-ENV FRONTEND_URL=$FRONTEND_URL
 
 EXPOSE 3000
 
