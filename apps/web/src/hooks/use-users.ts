@@ -1,18 +1,28 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  queryOptions,
+  useMutation,
+  useQuery,
+  useQueryClient,
+  useSuspenseQuery,
+} from "@tanstack/react-query";
 
 import { api } from "@/config/api";
 
+export const useUsersQueryOptions = queryOptions({
+  queryKey: ["users"],
+  queryFn: async () => {
+    const { data, error } = await api.users.get();
+
+    if (error) {
+      throw error;
+    }
+
+    return data;
+  },
+});
+
 export function useUsers() {
-  return useQuery({
-    queryKey: ["users"],
-    queryFn: async () => {
-      const { data, error } = await api.users.get();
-      if (error) {
-        throw error;
-      }
-      return data;
-    },
-  });
+  return useSuspenseQuery(useUsersQueryOptions);
 }
 
 export function useUser(id: string) {

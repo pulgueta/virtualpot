@@ -1,4 +1,4 @@
-import type { App } from "@backend/index";
+import type { App } from "@backend/server";
 import { treaty } from "@elysiajs/eden";
 
 import { env } from "@/env";
